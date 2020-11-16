@@ -1,0 +1,104 @@
+
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fa fa-bars"></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+        <a href="#"></a>
+        <div id="close-sidebar">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+      
+      <!-- sidebar-header  -->
+      <div class="sidebar-search">
+        <div>
+          <div class="input-group">
+            <input type="text" class="form-control search-menu" placeholder="Search...">
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- sidebar-search  -->
+      <div class="sidebar-menu">
+        <ul routerLinkActive="active">
+          <li class="sidebar-dropdown">
+            <a routerLink="/productsummary">
+              <i class="fa fa-users"></i>
+              <span>Product Summary</span>
+            </a>
+          </li>
+
+          <li class="sidebar-dropdown">
+            <a routerLink="/productdetail">
+              <i class="fa fa-user"></i>
+              <span>Product Details</span>
+            </a>
+          </li>
+          <li class="sidebar-dropdown">
+            <a routerLink="/orderdetail">
+              <i class="fa fa-cog"></i>
+              <span>Order Details</span>
+            </a>
+          </li>
+
+          <li class="sidebar-dropdown">
+            <a routerLink="">
+              <i class="fa fa-cog"></i>
+              <span>Registration</span>
+            </a>
+          </li>
+
+          <li class="sidebar-dropdown">
+            <a routerLink="/login">
+              <i class="fa fa-cog"></i>
+              <span>Login</span>
+            </a>
+          </li>
+
+          <li class="sidebar-dropdown">
+            <a routerLink="/imgupload">
+              <i class="fa fa-cog"></i>
+              <span>Image Upload</span>
+            </a>
+          </li>
+
+          <li class="sidebar-dropdown">
+            <a routerLink="/dataTable">
+              <i class="fa fa-cog"></i>
+              <span>DataTable</span>
+            </a>
+          </li>
+
+          <li class="sidebar-dropdown">
+            <a routerLink="/dataTablengbootstrap">
+              <i class="fa fa-cog"></i>
+              <span>DataTable Ng</span>
+            </a>
+          </li>
+        
+        </ul>
+      </div>
+      <!-- sidebar-menu  -->
+    </div>
+  
+  </nav>
+  <main class="page-content">
+    <div class="container-fluid">
+      
+    </div>
+  </main>
+  <!-- page-content" -->
+
+  <div class="page-content">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

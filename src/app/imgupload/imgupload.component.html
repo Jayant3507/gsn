@@ -1,0 +1,25 @@
+
+  <div class="container">
+    <!-- <div class="custom-file">
+      <input type="file" accept=".xslx,.pdf" class="custom-file-input" id="validatedCustomFile" required (change)="onFileChange($event)" multiple>
+      <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+      <div class="invalid-feedback">Example invalid custom file feedback</div>
+    </div>
+
+    <div>
+    <i class="fas fa-times" (click)="removeSelectedFile(index)"></i>
+      <img *ngFor='let img of images' [src]="img" height="100" class="hover"><br>
+   </div>  -->
+   
+   <div class="card">
+    <p-fileUpload name="demo[]" url=""
+            multiple="multiple" accept="image/*" maxFileSize="5000000" >
+            <ng-template pTemplate="content">
+                <ul *ngIf="images.length" >
+                    <li *ngFor="let file of images">{{file.name}} - {{file.size}} bytes</li>
+                </ul>
+            </ng-template>
+    </p-fileUpload>
+  </div>
+</div>
+

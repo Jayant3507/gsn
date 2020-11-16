@@ -1,0 +1,111 @@
+<form>
+  <div class="container">
+  <div class="row">
+    <div class="col-md-6">
+    <div class="form-group form-inline">
+        Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="From Date"
+               name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="navbar-toggler-icon fa fa-calendar"></i></button>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" placeholder="To Date"
+                 name="dp1" [(ngModel)]="model1" ngbDatepicker #d1="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button"><i class="navbar-toggler-icon fa fa-calendar"> </i></button>
+          </div>
+        </div>
+      </div>
+     </div>
+
+    </div>
+  </div>
+  </form>
+  
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" sortable="name" (sort)="onSort($event)">Country</th>
+      <th scope="col" sortable="area" (sort)="onSort($event)">Area</th>
+      <th scope="col" sortable="population" (sort)="onSort($event)">Population</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let country of countries$ | async; index as i">
+      <th scope="row">{{ country.id }}</th>
+      <td>
+        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
+        <ngb-highlight [result]="country.name" [term]="filter.value"></ngb-highlight>
+      </td>
+      <td><ngb-highlight [result]="country.area | number" [term]="filter.value"></ngb-highlight></td>
+      <td><ngb-highlight [result]="country.population | number" [term]="filter.value"></ngb-highlight></td>
+      <td>
+        <button type="button" class="btn btn-primary" (click)="openModal(editProfileModal, country)">Edit</button>
+       </td>
+    </tr>
+    </tbody>
+
+  </table>
+<!--pagination-->
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+    </ngb-pagination>
+    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select>
+  </div>
+  
+  <!--modal-->
+  <ng-template #editProfileModal let-modal>
+    <div class="modal-header">
+     <h5 class="modal-title" id="editProfileLabel">Edit Profile</h5>
+     <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+     </button>
+    </div>
+    
+
+    <div class="modal-body">
+     <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+       <label for="firstname" class="col-sm-4 col-form-label">Country</label>
+       <div class="col-sm-8">
+        <input type="text" class="form-control" formControlName="country" id="country" autocomplete="off">
+       </div>
+      </div>
+      <div class="form-group row">
+       <label for="lastname" class="col-sm-4 col-form-label">Area</label>
+       <div class="col-sm-8">
+        <input type="text" class="form-control" formControlName="area" id="area" autocomplete="off">
+       </div>
+      </div>
+      <div class="form-group row">
+       <label for="username" class="col-sm-4 col-form-label">Population</label>
+       <div class="col-sm-8">
+        <input type="text" class="form-control" formControlName="population" id="population" autocomplete="off">
+       </div>
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+       <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+     </form>
+    </div>
+   </ng-template>
